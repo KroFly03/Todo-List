@@ -5,7 +5,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="036c46aa-d631-4b71-9a8a-d929a655d648" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/Todo-List.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/12d973e4-bdc6-4b9b-9686-d27b3e15a9d1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/12d973e4-bdc6-4b9b-9686-d27b3e15a9d1/storage_v2/_src_/database/todo_list.9zxrpg.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/12d973e4-bdc6-4b9b-9686-d27b3e15a9d1/storage_v2/_src_/database/todo_list.9zxrpg/schema/information_schema.FNRwLQ.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/12d973e4-bdc6-4b9b-9686-d27b3e15a9d1/storage_v2/_src_/database/todo_list.9zxrpg/schema/pg_catalog.0S1ZNQ.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/12d973e4-bdc6-4b9b-9686-d27b3e15a9d1/storage_v2/_src_/database/todo_list.9zxrpg/schema/public.abK9xQ.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -112,7 +124,7 @@
       <workItem from="1683544573068" duration="1208000" />
       <workItem from="1683572955639" duration="40000" />
       <workItem from="1683573464850" duration="411000" />
-      <workItem from="1683573927637" duration="666000" />
+      <workItem from="1683573927637" duration="1245000" />
     </task>
     <servers />
   </component>
