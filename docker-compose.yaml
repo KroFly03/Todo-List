@@ -1,12 +1,49 @@
-version: '3.3'
+version: "3.9"
+
 services:
-  db:
-    image: postgres:14.1-alpine
-    container_name: db
-    restart: always
-    environment:
-      - POSTGRES_USER=${DB_USER}
-      - POSTGRES_PASSWORD=${DB_PASSWORD}
-      - POSTGRES_DB=${DB_NAME}
+  frontend:
+    image: sermalenk/skypro-front:lesson-36
     ports:
-      - '2345:5432'
+      - "80:80"
+    depends_on:
+      - api
+
+  api:
+    build: ./backend
+    environment:
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=admin
+      - POSTGRES_DB=todo_list
+      - POSTGRES_NAME=to_list
+      - DB_HOST=db
+    ports:
+      - "8000:8000"
+    depends_on:
+      db:
+        condition: service_started
+
+  migrations:
+    build: ./backend
+    environment:
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=admin
+      - POSTGRES_DB=todo_list
+      - POSTGRES_NAME=to_list
+      - DB_HOST=db
+    depends_on:
+      api:
+        condition: service_started
+      db:
+        condition: service_started
+    command: python manage.py migrate
+
+  db:
+    image: postgres:15.2
+    ports:
+      - "5555:5432"
+    environment:
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=admin
+      - POSTGRES_DB=todo_list
+      - DB_HOST=db
+    restart: always
