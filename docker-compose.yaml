@@ -1,49 +1,54 @@
-version: "3.9"
+version: "3.8"
 
 services:
   frontend:
-    image: sermalenk/skypro-front:lesson-36
+    image: sermalenk/skypro-front:lesson-34
     ports:
-      - "80:80"
+      - "800:80"
     depends_on:
-      - api
+      api:
+        condition: service_started
 
   api:
-    build: ./backend
+    build: .
+    env_file:
+      - .env
     environment:
-      - POSTGRES_USER=admin
-      - POSTGRES_PASSWORD=admin
-      - POSTGRES_DB=todo_list
-      - POSTGRES_NAME=to_list
-      - DB_HOST=db
+      - POSTGRES_HOST=db
+      - POSTGRES_PORT=5432
     ports:
       - "8000:8000"
     depends_on:
       db:
-        condition: service_started
+        condition: service_healthy
+      migrations:
+        condition: service_completed_successfully
 
   migrations:
-    build: ./backend
+    build: .
+    env_file:
+      - .env
     environment:
-      - POSTGRES_USER=admin
-      - POSTGRES_PASSWORD=admin
-      - POSTGRES_DB=todo_list
-      - POSTGRES_NAME=to_list
-      - DB_HOST=db
+      - POSTGRES_HOST=db
+      - POSTGRES_PORT=5432
     depends_on:
-      api:
-        condition: service_started
       db:
-        condition: service_started
+        condition: service_healthy
     command: python manage.py migrate
 
   db:
     image: postgres:15.2
     ports:
       - "5555:5432"
-    environment:
-      - POSTGRES_USER=admin
-      - POSTGRES_PASSWORD=admin
-      - POSTGRES_DB=todo_list
-      - DB_HOST=db
+    env_file:
+      - .env
+    healthcheck:
+      test: pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}
+      interval: 3s
+      retries: 10
+      timeout: 3s
     restart: always
+    volumes:
+      - pg_data:/var/lib/postgresql/data/
+volumes:
+  pg_data:

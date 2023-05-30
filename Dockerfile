@@ -6,9 +6,10 @@ ENV PYTHONUNBUFFERED 1
 WORKDIR /app
 
 COPY requirements.txt .
+
 RUN python -m pip install --no-cache -r requirements.txt
 
-COPY .. .
+COPY . .
 
 EXPOSE 8000
 
