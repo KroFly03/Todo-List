@@ -13,8 +13,7 @@
       "is_staff": true,
       "is_active": true,
       "date_joined": "2023-05-06 12:52:17.142690 +00:00",
-      "birth_date": null,
-      "image": ""
+      "birth_date": null
     }
   },
   {
@@ -31,8 +30,7 @@
       "is_staff": false,
       "is_active": true,
       "date_joined": "2023-05-06 13:42:49.000000 +00:00",
-      "birth_date": "2023-05-06",
-      "image": "users/Za3KSpB4BtQ_ZQ65BAf.jpg"
+      "birth_date": "2023-05-06"
     }
   },
   {
@@ -49,8 +47,7 @@
       "is_staff": false,
       "is_active": true,
       "date_joined": "2023-05-06 13:49:42.000000 +00:00",
-      "birth_date": "2023-05-06",
-      "image": "users/Za3KSpB4BtQ.jpg"
+      "birth_date": "2023-05-06"
     }
   },
   {
@@ -67,8 +64,7 @@
       "is_staff": false,
       "is_active": true,
       "date_joined": "2023-05-06 13:49:59.000000 +00:00",
-      "birth_date": "2023-05-06",
-      "image": "users/Za3KSpB4BtQ_fnlAlib.jpg"
+      "birth_date": "2023-05-06"
     }
   },
   {
@@ -85,8 +81,7 @@
       "is_staff": false,
       "is_active": true,
       "date_joined": "2023-05-06 13:50:13.000000 +00:00",
-      "birth_date": "2023-05-06",
-      "image": "users/Za3KSpB4BtQ_T71dgOP.jpg"
+      "birth_date": "2023-05-06"
     }
   }
 ]

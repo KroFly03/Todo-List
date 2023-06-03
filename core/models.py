@@ -6,4 +6,3 @@ from django.db import models
 
 class User(AbstractUser):
     birth_date = models.DateField(null=True)
-    image = models.ImageField(upload_to='users')
