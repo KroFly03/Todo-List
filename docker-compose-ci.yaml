@@ -2,9 +2,9 @@ version: "3.8"
 
 services:
   frontend:
-    image: sermalenk/skypro-front:lesson-35
+    image: sermalenk/skypro-front:lesson-34
     ports:
-      - "800:800"
+      - "800:80"
     depends_on:
       api:
         condition: service_started

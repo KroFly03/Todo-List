@@ -29,15 +29,6 @@ jobs:
           export POSTGRES_USER=${{ secrets.POSTGRES_USER }}
           export POSTGRES_DB=${{ secrets.POSTGRES_DB }}
           cat docker-compose-ci.yaml | envsubst > deploy/docker-compose.yaml
-      - name: сlean up
-        if: always()
-        uses: appleboy/ssh-action@master
-        with:
-          host: ${{ secrets.SERVER_HOST}}
-          username: ${{ secrets.SERVER_USER }}
-          password: ${{ secrets.SERVER_PASSWORD }}
-          script: |
-            docker system prune -a -f
       - name: copy files
         uses: appleboy/scp-action@master
         with:
@@ -47,6 +38,15 @@ jobs:
           source: "deploy/docker-compose.yaml"
           target: "deploy"
           strip_components: 1
+      - name: сlean up
+        if: always()
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SERVER_HOST}}
+          username: ${{ secrets.SERVER_USER }}
+          password: ${{ secrets.SERVER_PASSWORD }}
+          script: |
+            docker system prune -a -f
       - name: docker-compose remote deployment
         uses: appleboy/ssh-action@master
         with:
