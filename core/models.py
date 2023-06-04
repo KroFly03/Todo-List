@@ -5,4 +5,6 @@ from django.db import models
 # Create your models here.
 
 class User(AbstractUser):
-    birth_date = models.DateField(null=True)
+    first_name = models.CharField(max_length=150)
+    last_name = models.CharField(max_length=150)
+    email = models.EmailField()
