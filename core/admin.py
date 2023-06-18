@@ -5,8 +5,6 @@ from django.contrib.auth.models import Group
 from core.models import User
 
 
-# Register your models here.
-
 class CustomUserAdmin(UserAdmin):
     change_user_password_template = AdminPasswordChangeForm
     list_display = ('username', 'email', 'first_name', 'last_name')
