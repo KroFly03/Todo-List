@@ -1,8 +1,9 @@
 from django.contrib import admin
 
-from goals.models import GoalCategory, GoalComment
+from goals.models import GoalComment, GoalCategory, Goal
 
 
+@admin.register(GoalCategory)
 class GoalCategoryAdmin(admin.ModelAdmin):
     list_display = ('id', 'title')
     readonly_fields = ('created', 'updated')
@@ -15,6 +16,7 @@ class GoalCommentInline(admin.StackedInline):
     extra = 0
 
 
+@admin.register(Goal)
 class GoalCommentAdmin(admin.ModelAdmin):
     list_display = ('id', 'title')
     search_fields = ['title', 'description']
@@ -22,6 +24,3 @@ class GoalCommentAdmin(admin.ModelAdmin):
     list_filter = ['status', 'priority']
     inlines = [GoalCommentInline]
 
-
-admin.site.register(GoalCategory, GoalCategoryAdmin)
-admin.site.register(GoalComment, GoalCommentAdmin)
