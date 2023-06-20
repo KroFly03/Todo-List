@@ -18,7 +18,6 @@ class GoalCategoryCreateView(generics.CreateAPIView):
 
 
 class GoalCategoryListView(generics.ListAPIView):
-    model = GoalCategory
     permission_classes = [permissions.IsAuthenticated]
     serializer_class = GoalCategoryWithUserSerializer
     filter_backends = [filters.OrderingFilter, filters.SearchFilter]
@@ -31,7 +30,6 @@ class GoalCategoryListView(generics.ListAPIView):
 
 
 class GoalCategoryView(generics.RetrieveUpdateDestroyAPIView):
-    model = GoalCategory
     serializer_class = GoalCategoryWithUserSerializer
     permission_classes = [OwnerPermission]
 
@@ -43,7 +41,6 @@ class GoalCategoryView(generics.RetrieveUpdateDestroyAPIView):
             instance.is_deleted = True
             instance.save(update_fields=['is_deleted'])
             instance.goal_set.update(status=Goal.Status.archived)
-        return instance
 
 
 class GoalCreateView(generics.CreateAPIView):
