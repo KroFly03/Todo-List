@@ -7,5 +7,9 @@ class User(AbstractUser):
     last_name = models.CharField(verbose_name='Фамилия', max_length=150)
     email = models.EmailField(verbose_name='Почта')
 
+    class Meta:
+        verbose_name = 'Пользователь'
+        verbose_name_plural = 'Пользователи'
+
     def __str__(self):
         return self.last_name

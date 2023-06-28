@@ -2,7 +2,7 @@ version: "3.8"
 
 services:
   frontend:
-    image: sermalenk/skypro-front:lesson-37
+    image: sermalenk/skypro-front:lesson-38
     ports:
       - "800:80"
     depends_on:
@@ -23,6 +23,20 @@ services:
         condition: service_healthy
       migrations:
         condition: service_completed_successfully
+
+  bot:
+    build: .
+    env_file:
+      - .env
+    environment:
+      - POSTGRES_HOST=db
+      - POSTGRES_PORT=5432
+    depends_on:
+      db:
+        condition: service_healthy
+      migrations:
+        condition: service_completed_successfully
+    command: python manage.py run_bot
 
   migrations:
     build: .

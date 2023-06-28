@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'core',
     'goals',
     'social_django',
+    'bot',
 ]
 
 MIDDLEWARE = [
@@ -167,3 +168,6 @@ SOCIAL_AUTH_LOGIN_ERROR_URL = '/login-error/'
 REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
 }
+
+
+BOT_TOKEN = os.environ.get('BOT_TOKEN')
