@@ -27,7 +27,6 @@ class TgClient:
         response = requests.get(url, params=params)
 
         if not response.ok:
-            message = f'invalid status code from telegram {response.status_code} on command {command}'
-            return {'ok': False, 'result': [message]}
+            return {'ok': False, 'result': []}
 
         return response.json()
