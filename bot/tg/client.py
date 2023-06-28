@@ -28,6 +28,6 @@ class TgClient:
 
         if not response.ok:
             message = f'invalid status code from telegram {response.status_code} on command {command}'
-            return {'ok': False, 'result': message}
+            return {'ok': False, 'result': [message]}
 
         return response.json()
