@@ -14,10 +14,10 @@ class TgUserSerializer(serializers.ModelSerializer):
         try:
             tg_user = TgUser.objects.get(verification_code=code)
         except TgUser.DoesNotExist:
-            raise ValidationError('invalid verification code')
+            raise ValidationError('Invalid verification code.')
         else:
             if tg_user.is_verified:
-                raise ValidationError('user has already verified')
+                raise ValidationError('User has already verified.')
 
             self.instance = tg_user
             return code

@@ -4,6 +4,8 @@ from django.contrib.auth.hashers import make_password
 from django.contrib.auth import get_user_model, authenticate
 from rest_framework.exceptions import ValidationError, AuthenticationFailed, NotAuthenticated
 
+from core.models import User
+
 USER_MODEL = get_user_model()
 
 
@@ -26,7 +28,7 @@ class RegistrationSerializer(serializers.ModelSerializer):
 
     def validate(self, attrs):
         if attrs['password'] != attrs['password_repeat']:
-            raise ValidationError('Пароли не совпадают')
+            raise ValidationError('Passwords are different.')
         return attrs
 
     def create(self, validated_data):
@@ -68,13 +70,13 @@ class UpdatePasswordSerializer(serializers.ModelSerializer):
         if not (user := attrs['user']):
             raise NotAuthenticated
         if not user.check_password(attrs['old_password']):
-            raise ValidationError({'old_password': 'incorrect password'})
+            raise ValidationError('Incorrect old password.')
         return attrs
 
     def create(self, validated_data):
         raise NotImplementedError
 
-    def update(self, instance, validated_data):
+    def update(self, instance: User, validated_data):
         instance.password = make_password(validated_data['new_password'])
         instance.save(update_fields=('password',))
         return instance

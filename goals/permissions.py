@@ -1,10 +1,10 @@
 from rest_framework.permissions import IsAuthenticated, SAFE_METHODS
 
-from goals.models import BoardParticipant
+from goals.models import BoardParticipant, Goal, GoalComment, GoalCategory, Board
 
 
 class BoardPermission(IsAuthenticated):
-    def has_object_permission(self, request, view, obj):
+    def has_object_permission(self, request, view, obj: Board):
         _filters = {'user': request.user, 'board': obj}
         if request.method not in SAFE_METHODS:
             _filters['role'] = BoardParticipant.Role.owner
@@ -13,7 +13,7 @@ class BoardPermission(IsAuthenticated):
 
 
 class GoalCategoryPermission(IsAuthenticated):
-    def has_object_permission(self, request, view, obj):
+    def has_object_permission(self, request, view, obj: GoalCategory):
         _filters = {'user': request.user, 'board': obj.board}
         if request.method not in SAFE_METHODS:
             _filters['role__in'] = [BoardParticipant.Role.owner, BoardParticipant.Role.writer]
@@ -22,7 +22,7 @@ class GoalCategoryPermission(IsAuthenticated):
 
 
 class GoalPermission(IsAuthenticated):
-    def has_object_permission(self, request, view, obj):
+    def has_object_permission(self, request, view, obj: Goal):
         _filters = {'user': request.user, 'board': obj.category.board}
         if request.method not in SAFE_METHODS:
             _filters['role__in'] = [BoardParticipant.Role.owner, BoardParticipant.Role.writer]
@@ -31,7 +31,7 @@ class GoalPermission(IsAuthenticated):
 
 
 class GoalCommentPermission(IsAuthenticated):
-    def has_object_permission(self, request, view, obj):
+    def has_object_permission(self, request, view, obj: GoalComment):
         if request.method in SAFE_METHODS:
             return True
         return obj.user == request.user

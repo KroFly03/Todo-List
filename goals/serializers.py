@@ -23,7 +23,7 @@ class BoardParticipantSerializer(serializers.ModelSerializer):
         fields = '__all__'
         read_only_fields = ('id', 'created', 'updated', 'board')
 
-    def validate_user(self, user):
+    def validate_user(self, user: User):
         if self.context['request'].user == user:
             raise ValidationError('Failed to change your role')
         return user
@@ -32,7 +32,7 @@ class BoardParticipantSerializer(serializers.ModelSerializer):
 class BoardWithParticipantSerializer(BoardSerializer):
     participants = BoardParticipantSerializer(many=True)
 
-    def update(self, instance, validated_data):
+    def update(self, instance: Board, validated_data):
         request = self.context['request']
 
         with transaction.atomic():
@@ -59,7 +59,7 @@ class GoalCategorySerializer(serializers.ModelSerializer):
         fields = '__all__'
         read_only_fields = ('id', 'created', 'updated', 'is_deleted')
 
-    def validate_board(self, board):
+    def validate_board(self, board: Board):
         if board.is_deleted:
             raise ValidationError('Board is deleted')
 
@@ -83,9 +83,9 @@ class GoalSerializer(serializers.ModelSerializer):
         fields = '__all__'
         read_only_fields = ('id', 'created', 'updated', 'user')
 
-    def validate_category(self, category):
+    def validate_category(self, category: GoalCategory):
         if category.is_deleted:
-            raise ValidationError('Category not found')
+            raise ValidationError('Category is deleted.')
 
         if not BoardParticipant.objects.filter(board_id=category.board_id,
                                                role__in=[BoardParticipant.Role.owner, BoardParticipant.Role.writer],
@@ -107,7 +107,7 @@ class GoalCommentSerializer(serializers.ModelSerializer):
         fields = '__all__'
         read_only_fields = ('id', 'created', 'updated', 'is_deleted')
 
-    def validate_goal(self, goal):
+    def validate_goal(self, goal: Goal):
         if goal.status == Goal.Status.archived:
             raise ValidationError('Goal not found')
 

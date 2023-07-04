@@ -28,7 +28,6 @@ class GoalCategoryListView(generics.ListAPIView):
     search_fields = ['title']
 
     def get_queryset(self):
-        print(self.args)
         return GoalCategory.objects.filter(board__participants__user=self.request.user).exclude(is_deleted=True)
 
 
@@ -37,7 +36,7 @@ class GoalCategoryView(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = [GoalCategoryPermission]
     queryset = GoalCategory.objects.exclude(is_deleted=True)
 
-    def perform_destroy(self, instance):
+    def perform_destroy(self, instance: GoalCategory):
         with transaction.atomic():
             instance.is_deleted = True
             instance.save(update_fields=['is_deleted'])
@@ -69,7 +68,7 @@ class GoalView(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = GoalWithUserSerializer
     queryset = Goal.objects.exclude(status=Goal.Status.archived)
 
-    def perform_destroy(self, instance):
+    def perform_destroy(self, instance: Goal):
         instance.status = Goal.Status.archived
         instance.save(update_fields=['status'])
 
@@ -124,7 +123,7 @@ class BoardView(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = BoardWithParticipantSerializer
     queryset = Board.objects.prefetch_related('participants__user').exclude(is_deleted=True)
 
-    def perform_destroy(self, instance):
+    def perform_destroy(self, instance: Board):
         with transaction.atomic():
             Board.objects.filter(id=instance.id).update(is_deleted=True)
             instance.categories.update(is_deleted=True)
