@@ -7,6 +7,7 @@ Todo List is a user-friendly website that helps you stay organized and manage yo
 ## Requirements
 
 * Docker version 23.0.6
+* Django 4.2.3
 
 ## Build
 
